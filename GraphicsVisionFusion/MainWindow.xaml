@@ -1,0 +1,57 @@
+﻿<Window x:Class="GraphicsVisionFusion.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:GraphicsVisionFusion"
+        xmlns:emgu="clr-namespace:Emgu.CV.UI;assembly=Emgu.CV.UI"
+        xmlns:sharpGL="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        FontFamily="Roboto"
+        Title="Graphics Vision Fusion" Height="720" Width="1366"
+        Closed="destroyAll" Background="#FF252525">
+
+    <Grid>
+        <Grid HorizontalAlignment="Left" Margin="25" VerticalAlignment="Top" Width="640" Height="480">
+            <WindowsFormsHost VerticalAlignment="Top" Height="480" Width="640" Background="White">
+                <emgu:ImageBox x:Name="imgBox"></emgu:ImageBox>
+            </WindowsFormsHost>
+        </Grid>
+        <!--<Grid HorizontalAlignment="Left" Margin="25,520,25,25" VerticalAlignment="Top" Width="640" Height="50">
+            <TextBlock Margin="0,0,0,0">X-Axis</TextBlock>
+            <TextBlock Name="xa" Margin="50,0,0,0" Text="0"/>
+            <TextBlock Margin="120,0,50,0">Y-Axis</TextBlock>
+            <TextBlock Name="ya" Margin="170,0,50,0" Text="0"/>
+            <TextBlock Margin="240,0,50,0">Z-Axis</TextBlock>
+            <TextBlock Name="za" Margin="290,0,50,0" Text="0"/>
+        </Grid>-->
+        
+        <Grid HorizontalAlignment="Left" Margin="25,505,0,0" VerticalAlignment="Stretch" Width="640">
+            <Slider x:Name="col1up" HorizontalAlignment="Left" Margin="25,80,0,0" VerticalAlignment="Top" Maximum="180" Width="250" ValueChanged="col1up_ValueChanged" Value="75"/>
+            <Slider x:Name="col1low" HorizontalAlignment="Left" Margin="25,120,0,0" VerticalAlignment="Top" Maximum="180" Width="250" ValueChanged="col1low_ValueChanged" Value="65"/>
+
+            <Slider x:Name="col2up" HorizontalAlignment="Left" Margin="325,80,0,0" VerticalAlignment="Top" Maximum="180" Width="250"/>
+            <Slider x:Name="col2low" HorizontalAlignment="Left" Margin="325,120,0,0" VerticalAlignment="Top" Maximum="180" Width="250"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Right" Margin="25" VerticalAlignment="Top" Width="640" Height="480">
+            <sharpGL:OpenGLControl x:Name="openGLControl"
+            OpenGLDraw="openGLControl_OpenGLDraw" OpenGLInitialized="openGLControl_OpenGLInitialized" Resized="openGLControl_Resized"
+            DrawFPS="False" RenderContextType="FBO" FrameRate="12" Background="White"/>
+        </Grid>
+        
+        <Grid HorizontalAlignment="Right" Margin="0,510,25,0" VerticalAlignment="Top" Width="640">
+            <xctk:ColorPicker Name="colorPicker" Width="100" Height="25" Foreground="Black" FontWeight="Light"
+                              ShowDropDownButton="False" ShowStandardColors="False" ShowAdvancedButton="False"
+                              ShowAvailableColors="True" ShowRecentColors="True"
+                              AvailableColorsHeader="Pick Color" RecentColorsHeader="Recent Colors"
+                              AvailableColorsSortingMode="HueSaturationBrightness" SelectedColorChanged="ColorPicker_SelectedColorChanged">
+            </xctk:ColorPicker>
+        </Grid>
+        
+        <Grid HorizontalAlignment="Right" Margin="0,580,25,0" VerticalAlignment="Top" Width="640">
+            <Button Margin="145,10,395,0" Width="100" Height="40" Click="rotateButton" Foreground="White" Background="#FF03A9F4" FontWeight="ExtraLight" FontSize="18" >Rotate</Button>
+            <Button Margin="395,10,145,0" Width="100" Height="40" Click="clearButton" Foreground="White" Background="#FF03A9F4" FontWeight="ExtraLight" FontSize="18" >Clear</Button>
+        </Grid>
+
+    </Grid>
+</Window>
